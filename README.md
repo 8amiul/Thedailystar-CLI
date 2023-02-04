@@ -1,5 +1,5 @@
 # Thedailystar-CLI
-#### Video Demo: <URL>
+#### Video Demo: https://youtu.be/5Tp4xeqNLEc
 
 ## Description
 Thedailystar-CLI is a terminal based program written in python for CS50's Introduction to Programming with Python. This program does scrape news from [The Daily Star](https://www.thedailystar.net/)
