@@ -53,7 +53,8 @@ def get_news_lines():
     NEWS_DATA = {}
     news_page = requests.get(LATEST_NEWS).text
     format_ = BeautifulSoup(news_page,'lxml')
-    all_news = format_.find_all('td', class_="views-field views-field-title")
+    #all_news = format_.find_all('td', class_="views-field views-field-title")
+    all_news = format_.find_all('div', class_="card-content")
     for i in all_news:
         NEWS_DATA[i.a.text] = i.a.get('href')
     return NEWS_DATA
