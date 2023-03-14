@@ -52,7 +52,7 @@ def menu(stdscr, test_= None):
 def get_news_lines():
     NEWS_DATA = {}
     news_page = requests.get(LATEST_NEWS).text
-    format_ = BeautifulSoup(news_page,'lxml')
+    format_ = BeautifulSoup(news_page,'html') #lxml
     #all_news = format_.find_all('td', class_="views-field views-field-title")
     all_news = format_.find_all('div', class_="card-content")
     for i in all_news:
@@ -140,7 +140,7 @@ def select_news(scr,news_data: dict, test_=None):
 def get_news(news_dict: dict, news_lines_list: list, selected_news: int):
     l = f'{BASE_URL}{news_dict[news_lines_list[selected_news]]}'
     l_source = requests.get(l).text
-    format_ = BeautifulSoup(l_source, 'lxml')
+    format_ = BeautifulSoup(l_source, 'html') #lxml
     headline = format_.find('h1', itemprop="headline").text
     the_news = format_.find_all('p')
     news_p = []
