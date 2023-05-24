@@ -52,9 +52,10 @@ def menu(stdscr, test_= None):
 def get_news_lines():
     NEWS_DATA = {}
     news_page = requests.get(LATEST_NEWS).text
-    format_ = BeautifulSoup(news_page,'html') #lxml
-    #all_news = format_.find_all('td', class_="views-field views-field-title")
+    format_ = BeautifulSoup(news_page,'lxml')
     all_news = format_.find_all('div', class_="card-content")
+#    all_news = format_.find_all('td', class_="views-field views-field-title")
+
     for i in all_news:
         NEWS_DATA[i.a.text] = i.a.get('href')
     return NEWS_DATA
@@ -140,13 +141,13 @@ def select_news(scr,news_data: dict, test_=None):
 def get_news(news_dict: dict, news_lines_list: list, selected_news: int):
     l = f'{BASE_URL}{news_dict[news_lines_list[selected_news]]}'
     l_source = requests.get(l).text
-    format_ = BeautifulSoup(l_source, 'html') #lxml
+    format_ = BeautifulSoup(l_source, 'lxml')
     headline = format_.find('h1', itemprop="headline").text
     the_news = format_.find_all('p')
     news_p = []
 
     for i in the_news:
-        if str(i).find('class="intro"') == -1:
+        if str(i).find('class="intro"') == -1 and str(i).find('class="title"') == -1:
             news_p.append(i.text)
     else:
         return headline, news_p
